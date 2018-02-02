@@ -1,0 +1,27 @@
+Field	Type	Null	Key	Default	Extra
+id	int(11)	NO	PRI	NULL	auto_increment
+sampleno	int(11)	NO	MUL	NULL	
+perno	int(11)	NO		NULL	
+gpstripid	int(11)	NO		NULL	
+gpstraveldayid	int(11)	NO		NULL	
+gpstraveldaytripid	int(11)	NO		NULL	
+start_time	datetime	NO		NULL	
+end_time	datetime	NO		NULL	
+duration_min	float	NO		NULL	
+distance_mile	float	NO		NULL	
+avg_speed_mph	float	NO		NULL	
+max_speed_mph	float	NO		NULL	
+travel_mode	int(11)	NO		NULL	
+nbstages	int(11)	NO		NULL	
+travelmodelist	tinytext	NO		NULL	
+numuniqmode	int(11)	NO		NULL	
+uniqmodelist	tinytext	NO		NULL	
+distancefromlastdest	float	NO		NULL	
+gaptime	float	NO		NULL	
+tripareatype	int(11)	NO		NULL	
+workrelated	int(11)	NO		NULL	
+no_transport	int(11)	NO		NULL	
+onsite	int(11)	NO		NULL	
+looptrip	int(11)	NO		NULL	
+origin_loc_type	tinytext	NO		NULL	
+destination_loc_ype	tinytext	NO		NULL	

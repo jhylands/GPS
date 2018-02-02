@@ -1,0 +1,9 @@
+Field	Type	Null	Key	Default	Extra
+id	int(11)	NO	PRI	NULL	auto_increment
+sampleno	int(11)	NO	MUL	NULL	
+perno	int(11)	NO		NULL	
+gpstripid	int(11)	NO		NULL	
+gpstraveldayid	int(11)	NO		NULL	
+localid	int(11)	NO		NULL	
+time_local	tinytext	NO		NULL	
+gpsspeed	float	NO		NULL	
