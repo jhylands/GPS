@@ -1,0 +1,7 @@
+sampno,perno,gpstripid,gpstravdayid,gpstravdaytripid,start_time,end_time,duration_min,distance_miles,avg_speed_mph,max_speed_mph,travel_mode,nbstages,travmodelist,numuniqmodes,uniqmodelist,distfromlastdest,gaptime,tripareatype,workrelated,no_transport,onsite,looptrip,origin_loc_type,destination_loc_type
+3198775,2,1,1,1,2014-11-25 08:19:07,2014-11-25 08:26:51,7.73,2.9275,22.71,47.8,3,1,3,1,3,,0.43,1,0,0,0,0,OTHER,OTHER
+3198775,2,2,1,2,2014-11-25 08:27:17,2014-11-25 08:33:36,6.32,0.8785,8.34,39.1,3,2,"3,1",2,"1,3",17.745857,8.08,1,0,0,0,0,OTHER,OTHER
+3198775,2,3,1,3,2014-11-25 08:41:41,2014-11-25 08:50:27,8.77,4.2705,29.23,65.9,3,2,"1,3",2,"1,3",104.184697,1.12,1,0,0,0,0,OTHER,OTHER
+3198775,2,4,1,4,2014-11-25 08:51:34,2014-11-25 09:15:12,23.63,17.5414,44.53,80.8,3,1,3,1,3,41.689988,8.28,1,0,0,0,0,OTHER,OTHER
+3198775,2,5,1,5,2014-11-25 09:23:29,2014-11-25 09:25:34,2.08,0.1115,3.21,3.7,1,1,1,1,1,9.37654,3266.47,1,0,0,0,0,OTHER,WORK
+3198775,2,6,3,1,2014-11-27 15:52:02,2014-11-27 16:03:28,11.43,5.2384,27.49,62.8,3,1,3,1,3,66692.628274,0.0,1,0,0,0,0,OTHER,OTHER

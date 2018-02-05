@@ -1,0 +1,4 @@
+#we want to generate the feature set for each of the trips
+
+with open('data.json','r') as f:
+	trips = json.loads(f.read())
