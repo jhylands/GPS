@@ -1,3 +1,4 @@
+#program to get the GPS data from strava gpx files
 import gpxpy
 import numpy as np
 
