@@ -12,8 +12,11 @@ d1x = FeatureSet.getSpeed(data)
 fs = FeatureSet(d1x,1,T)
 fs.mean(1)
 fs.mean(2)
+fs.median(1)
+fs.max(2)
 
-data = fs.retrive()
+fs.printHeadings()
+data = fs.getCSV()
 with open('out.csv','w+') as f:
-    f.write('\n'.join([','.join([str(e) for e in row]) for row in data]))
+    f.write(data)
 

@@ -27,7 +27,6 @@ class FeatureSet():
     @staticmethod
     def getTime(data):
 	assert(reduce(AND,[[len(x)==4 for x in trip] for trip in data.iteritems()]))
-	print data['\"515\"'][0][3]
 	return [[datetime.strptime(t, '%Y-%m-%d %H:%M:%S') for TripID,PointID,v,t in trip] for key,trip in data.iteritems()]
     #get the speed fields from the data 
     @staticmethod
@@ -56,8 +55,14 @@ class FeatureSet():
     #This function is to return the data
     #Needs to be able to take the information in, in J form 
     def retrive(self):
-	return self.columns
+	return np.transpose(self.columns)
+    #returns a string to be written to file, this includes headings
+    def getCSV(self):
+	headingString = '"'+ '","'.join(self.headings) + '"\n'
+	return headingString + '\n'.join([','.join([str(e) for e in row]) for row in self.retrive()]) 
 
+    def printHeadings(self):
+	print '|'.join(self.headings)
     def mean(self,d):
 	self.headings.append('Mean ' + self.dxNames[d])
 	self.columns.append([np.mean(trip) for trip in self.dOFx[d]])	
