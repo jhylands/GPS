@@ -19,11 +19,19 @@ class FeatureSet():
 
 
     #The class needs to be given the data; which needs to be in J format
-    def __init__(self,data):
+    #The input to the class is an array of arrays each containing the nth derivitive of smome dataset over some time t
+    def __init__(self,dnx,n,t): 
+	#The input must be either position data or a derivitive thereof
+	assert(dnx>=0 and dnx<=4)
     	self.dxNames = ['position','speed','acceleration','jerk'] 
 	self.dOFx = [[],[],[],[]]
-	self.dOFx[1] = data #speeds
-	self.dOFx[2] = [self.dtripdt(trip) for trip in data]
+	self.dOFx[n] = dnx #speeds
+	#not sure if I should included something that make the position data, not sure if it would be useful
+	if(n==1):
+	    self.dOFx[2] = [self.dtripdt(trip) for trip in dnx]
+	elif(n==0):
+	    self.dOFx[1] = [self.dtripdt(trip) for trip in dnx]
+	    self.dOFx[2] = [self.dtripst(trip) for trip in self.dOFx[1]]
 	self.columns = []
 	self.headings=[]
 
