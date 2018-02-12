@@ -20,7 +20,7 @@ with open(name,'r') as f:
 trips = {}
 for row in file:
     if row[0] in trips:
-	trips[row[0]].append(row)
+	trips[row[0]].append(point2point(row))
     else:
 	trips.update({row[0]:[point2point(row)]})
 
