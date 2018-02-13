@@ -17,6 +17,7 @@ fs.max(2)
 
 fs.printHeadings()
 data = fs.getCSV()
-with open('out.csv','w+') as f:
+name = sys.argv[2]
+with open(name,'w+') as f:
     f.write(data)
 

@@ -84,7 +84,7 @@ class FeatureSet():
 	self.headings.append('Standard deviation of ' + self.dxNames[d])
 	self.columns.append([np.std(trip) for trip in self.dOFx[d]])
 
-    def percentile(self,tiles,d):
+    def percentile(self,d,tiles):
 	#quatiles 1,10,25,75,90,99
 	tiles = tiles or [1,10,25,75,90,99] 
 	#CummulativeFrequenceySpeed
