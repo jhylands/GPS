@@ -20,7 +20,7 @@ def speedTime(name,file):
 			T = [ (p2.time-p1.time).total_seconds() for p1,p2 in zip(points[:-1],points[1:])]
 			DT = [(d,t) for d,t in zip(D,T)]
 			speeds = [ distance/time for distance,time in DT ]
-			return speeds,DT
+			return DT
 traces = []
 assert(len(sys.argv)==3)
 name = sys.argv[1]

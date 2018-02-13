@@ -26,14 +26,24 @@ class FeatureSet():
     #get the time fields from the data 
     @staticmethod
     def getTime(data):
-	assert(reduce(AND,[[len(x)==4 for x in trip] for trip in data.iteritems()]))
-	return [[datetime.strptime(t, '%Y-%m-%d %H:%M:%S') for TripID,PointID,v,t in trip] for key,trip in data.iteritems()]
+	if isinstance(data, dict):
+	    assert(reduce(AND,[[len(x)==4 for x in trip] for trip in data.iteritems()]))
+	    return [[datetime.strptime(t, '%Y-%m-%d %H:%M:%S') for TripID,PointID,v,t in trip] for key,trip in data.iteritems()]
+	else:
+	    assert(reduce(AND,[[len(x)==2 for x in trip] for trip in data]))
+	    #some datetime from seconds
+	    assert(False)
+ 
     #get the speed fields from the data 
     @staticmethod
     def getSpeed(data):
-	assert(reduce(AND,[[len(x)==4 for x in trip] for trip in data.iteritems()]))
-	return [[v for TripID,PointID,v,t in trip] for key,trip in data.iteritems()]
-
+	if isinstance(data, dict):
+	    assert(reduce(AND,[[len(x)==4 for x in trip] for trip in data.iteritems()]))
+	    return [[v for TripID,PointID,v,t in trip] for key,trip in data.iteritems()]
+	else:
+	    assert(reduce(AND,[[len(x)==2 for x in trip] for trip in data]))
+	    #some distances
+	    assert(False)
 
     #The class needs to be given the data; which needs to be in J format
     #The input to the class is an array of arrays each containing the nth derivitive of smome dataset over some time t
