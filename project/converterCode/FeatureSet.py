@@ -4,34 +4,19 @@ from datetime import datetime,timedelta
 #https://stackoverflow.com/questions/9647202/ordinal-numbers-replacement
 ordinal = lambda n: "%d%s" % (n,"tsnrhtdd"[(n/10%10!=1)*(n%10<4)*n%10::4])
 AND = (lambda a,b:a and b)
-def safeDiv(a,b):
-    if(not(b==0)):
-	return a/b
-    else:
-	print '/0 error!'
-	return a
 #What I want this class to be able to input a data and be able to output the 2d array of the dataset
 
-#keys for the feature vector string 
-#Acting on speed or acceloration 
-#mean  
-#median
-#mode  
-#min
-#max
-#percentile
 
 class FeatureSet():    
     #differntiate an array
     @staticmethod
     def dtripdt(x,t):
 	assert(not(isinstance(x[0],list)))
-	print t[0]
 	assert(not(isinstance(t[0],list)))
-	if(isinstance(t[0],datetime)):
-	    return [safeDiv((x2-x1),(t2-t1).total_seconds()) for x1,x2,t1,t2 in zip(x[:-1],x[1:],t[:-1],t[1:])]
-	else:
-	    return [(x2-x1)/t1.total_seconds() for x1,x2,t1,t2 in zip(x[:-1],x[1:],t[:-1],t[1:])]
+	#if(isinstance(t[0],datetime)):
+	return [(x2-x1)/(t2-t1).total_seconds() for x1,x2,t1,t2 in zip(x[:-1],x[1:],t[:-1],t[1:])]
+	#else:
+	#    return [(x2-x1)/t1.total_seconds() for x1,x2,t1,t2 in zip(x[:-1],x[1:],t[:-1],t[1:])]
 #for both the time and speed feilds should do a type check to make sure the 
 #structure of the array is what you think it is
     #get the time fields from the data 
@@ -43,7 +28,8 @@ class FeatureSet():
 	else:
 	    assert(reduce(AND,[[len(x)==2 for x in trip] for trip in data]))
 	    #some datetime from seconds
-	    return [[timedelta(0,point[1]) for point in trip if isinstance(point[1],float)] for trip in data]
+	    #return [[timedelta(0,point[1]) for point in trip if isinstance(point[1],float)] for trip in data]
+	    return [[datetime.strptime(t,'%Y-%m-%d %H:%M:%S') for x,t in trip] for trip in data]
  
     #get the posion based data fields from the data 
     @staticmethod
@@ -54,7 +40,7 @@ class FeatureSet():
 	else:
 	    assert(reduce(AND,[[len(x)==2 for x in trip] for trip in data]))
 	    #some distances
-	    return [trip[0] for trip in data],0
+	    return [[x for x,t in trip]  for trip in data],0
 
     #The class needs to be given the data; which needs to be in J format
     #The input to the class is an array of arrays each containing the nth derivitive of smome dataset over some time t
