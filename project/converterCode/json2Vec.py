@@ -8,8 +8,8 @@ with open(name,'r') as f:
 #Declare a set of features to be used.
 #for each trip create a velocity and time
 T = FeatureSet.getTime(data)
-d1x = FeatureSet.getSpeed(data)
-fs = FeatureSet(d1x,1,T)
+dnx,n = FeatureSet.getdnx(data)
+fs = FeatureSet(dnx,n,T)
 fs.mean(1)
 fs.mean(2)
 fs.median(1)

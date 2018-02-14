@@ -1,9 +1,15 @@
 import numpy as np
-from datetime import datetime
+from datetime import datetime,timedelta
 
 #https://stackoverflow.com/questions/9647202/ordinal-numbers-replacement
 ordinal = lambda n: "%d%s" % (n,"tsnrhtdd"[(n/10%10!=1)*(n%10<4)*n%10::4])
 AND = (lambda a,b:a and b)
+def safeDiv(a,b):
+    if(not(b==0)):
+	return a/b
+    else:
+	print '/0 error!'
+	return a
 #What I want this class to be able to input a data and be able to output the 2d array of the dataset
 
 #keys for the feature vector string 
@@ -19,8 +25,13 @@ class FeatureSet():
     #differntiate an array
     @staticmethod
     def dtripdt(x,t):
-	return [(x2-x1)/(t2-t1).total_seconds() for (x1,x2,t1,t2) in zip(x[:-1],x[1:],t[:-1],t[1:])]
-
+	assert(not(isinstance(x[0],list)))
+	print t[0]
+	assert(not(isinstance(t[0],list)))
+	if(isinstance(t[0],datetime)):
+	    return [safeDiv((x2-x1),(t2-t1).total_seconds()) for x1,x2,t1,t2 in zip(x[:-1],x[1:],t[:-1],t[1:])]
+	else:
+	    return [(x2-x1)/t1.total_seconds() for x1,x2,t1,t2 in zip(x[:-1],x[1:],t[:-1],t[1:])]
 #for both the time and speed feilds should do a type check to make sure the 
 #structure of the array is what you think it is
     #get the time fields from the data 
@@ -32,18 +43,18 @@ class FeatureSet():
 	else:
 	    assert(reduce(AND,[[len(x)==2 for x in trip] for trip in data]))
 	    #some datetime from seconds
-	    assert(False)
+	    return [[timedelta(0,point[1]) for point in trip if isinstance(point[1],float)] for trip in data]
  
-    #get the speed fields from the data 
+    #get the posion based data fields from the data 
     @staticmethod
-    def getSpeed(data):
+    def getdnx(data):
 	if isinstance(data, dict):
 	    assert(reduce(AND,[[len(x)==4 for x in trip] for trip in data.iteritems()]))
-	    return [[v for TripID,PointID,v,t in trip] for key,trip in data.iteritems()]
+	    return [[v for TripID,PointID,v,t in trip] for key,trip in data.iteritems()],1
 	else:
 	    assert(reduce(AND,[[len(x)==2 for x in trip] for trip in data]))
 	    #some distances
-	    assert(False)
+	    return [trip[0] for trip in data],0
 
     #The class needs to be given the data; which needs to be in J format
     #The input to the class is an array of arrays each containing the nth derivitive of smome dataset over some time t
@@ -57,8 +68,8 @@ class FeatureSet():
 	if(n==1):
 	    self.dOFx[2] = [self.dtripdt(X,T) for X,T in zip(dnx,t)]
 	elif(n==0):
-	    self.dOFx[1] = [self.dtripdt(trip) for trip in dnx]
-	    self.dOFx[2] = [self.dtripst(trip) for trip in self.dOFx[1]]
+	    self.dOFx[1] = [self.dtripdt(X,T) for X,T in zip(dnx,t)]
+	    self.dOFx[2] = [self.dtripdt(X,T) for X,T in zip(self.dOFx[1],t)]
 	self.columns = []
 	self.headings=[]
 
