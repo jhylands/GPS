@@ -17,7 +17,7 @@ def speedTime(name,file):
 			print len(segment.points)
 			points = segment.points
 			D = [ p2.distance_3d(p1) for p1,p2 in zip(points[:-1],points[1:])]
-			T = [ p.time.total_seconds() for p in points[:-1]]
+			T = [ p.time.strftime('%Y-%m-%d %H:%M:%S') for p in points[:-1]]
 			DT = [(d,t) for d,t in zip(D,T)]
 			#speeds = [ distance/time for distance,time in DT ]
 			return DT
