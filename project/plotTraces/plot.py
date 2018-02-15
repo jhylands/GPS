@@ -2,16 +2,20 @@
 import matplotlib
 matplotlib.use('Agg')
 import sys,json
-from FeatureSet import FeatureSet
 from matplotlib import pyplot as plt
-name = sys.argv[1]
+elm = sys.argv[1]
+name = sys.argv[2]
+sys.path.append('../converterCode/')
+from FeatureSet import FeatureSet
 with open(name,'r') as f:
     trips = json.loads(f.read())
 T = FeatureSet.getTime(trips)
-d1x = FeatureSet.getSpeed(trips)
-
+dnx,n = FeatureSet.getdnx(trips)
+fs = FeatureSet(dnx,n,T)
+d1x = fs.dOFx[1]
 #lets look deaper into this walking
-plot = [a for a in d1x[0]]
-print plot
+plot = [a for a in d1x[int(elm)]]
+#print plot
 plt.plot(plot)
-plt.savefig('out.png') 
+name = sys.argv[3]
+plt.savefig(name) 

@@ -11,12 +11,14 @@ class FeatureSet():
     #differntiate an array
     @staticmethod
     def dtripdt(x,t):
-	assert(not(isinstance(x[0],list)))
-	assert(not(isinstance(t[0],list)))
-	#if(isinstance(t[0],datetime)):
-	return [(x2-x1)/(t2-t1).total_seconds() for x1,x2,t1,t2 in zip(x[:-1],x[1:],t[:-1],t[1:])]
-	#else:
-	#    return [(x2-x1)/t1.total_seconds() for x1,x2,t1,t2 in zip(x[:-1],x[1:],t[:-1],t[1:])]
+	assert(isinstance(t[0],datetime))
+	assert(isinstance(x[0],float))
+	try:
+	    return [(x2-x1)/np.max([(t2-t1).total_seconds(),1]) for x1,x2,t1,t2 in zip(x[:-1],x[1:],t[:-1],t[1:])]
+	except ZeroDivisionError:
+	    for t1,t2 in zip(t[1:],t[:-1]):
+		print str(t1) + str(t2) + str(t2-t1)
+
 #for both the time and speed feilds should do a type check to make sure the 
 #structure of the array is what you think it is
     #get the time fields from the data 
