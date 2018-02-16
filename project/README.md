@@ -1,6 +1,6 @@
 # Project files
 
-This s the folder where all of the project code is stored.
+This is the folder where all of the project code is stored.
 
 
 ## currently working on 
