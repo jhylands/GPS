@@ -9,6 +9,7 @@ AND = (lambda a,b:a and b)
 
 class FeatureSet():    
     #differntiate an array
+    #Does not work on distance array -> must be displacement
     @staticmethod
     def dtripdt(x,t):
 	assert(isinstance(t[0],datetime))
