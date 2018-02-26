@@ -8,57 +8,14 @@ AND = (lambda a,b:a and b)
 
 
 class FeatureSet():    
-    #differntiate an array
-    #Does not work on distance array -> must be displacement
-    @staticmethod
-    def dtripdt(x,t):
-	assert(isinstance(t[0],datetime))
-	assert(isinstance(x[0],float))
-	try:
-	    return [abs(x2-x1)/np.max([(t2-t1).total_seconds(),1]) for x1,x2,t1,t2 in zip(x[:-1],x[1:],t[:-1],t[1:])]
-	except ZeroDivisionError:
-	    for t1,t2 in zip(t[1:],t[:-1]):
-		print str(t1) + str(t2) + str(t2-t1)
-
-#for both the time and speed feilds should do a type check to make sure the 
-#structure of the array is what you think it is
-    #get the time fields from the data 
-    @staticmethod
-    def getTime(data):
-	if isinstance(data, dict):
-	    assert(reduce(AND,[[len(x)==4 for x in trip] for trip in data.iteritems()]))
-	    return [[datetime.strptime(t, '%Y-%m-%d %H:%M:%S') for TripID,PointID,v,t in trip] for key,trip in data.iteritems()]
-	else:
-	    assert(reduce(AND,[[len(x)==2 for x in trip] for trip in data]))
-	    #some datetime from seconds
-	    #return [[timedelta(0,point[1]) for point in trip if isinstance(point[1],float)] for trip in data]
-	    return [[datetime.strptime(t,'%Y-%m-%d %H:%M:%S') for x,t in trip] for trip in data]
- 
-    #get the posion based data fields from the data 
-    @staticmethod
-    def getdnx(data):
-	if isinstance(data, dict):
-	    assert(reduce(AND,[[len(x)==4 for x in trip] for trip in data.iteritems()]))
-	    return [[v for TripID,PointID,v,t in trip] for key,trip in data.iteritems()],1
-	else:
-	    assert(reduce(AND,[[len(x)==2 for x in trip] for trip in data]))
-	    #some distances
-	    return [[x for x,t in trip]  for trip in data],0
 
     #The class needs to be given the data; which needs to be in J format
     #The input to the class is an array of arrays each containing the nth derivitive of smome dataset over some time t
-    def __init__(self,dnx,n,t): 
-	#The input must be either position data or a derivitive thereof
-	assert(n>=0 and n<=4)
-    	self.dxNames = ['position','speed','acceleration','jerk'] 
-	self.dOFx = [[],[],[],[]]
-	self.dOFx[n] = dnx #speeds
-	#not sure if I should included something that make the position data, not sure if it would be useful
-	if(n==1):
-	    self.dOFx[2] = [self.dtripdt(X,T) for X,T in zip(dnx,t)]
-	elif(n==0):
-	    self.dOFx[1] = [self.dtripdt(X,T) for X,T in zip(dnx,t)]
-	    self.dOFx[2] = [self.dtripdt(X,T) for X,T in zip(self.dOFx[1],t)]
+    def __init__(self,FormJ): 
+    	self.dxNames = ['position','speed','acceleration'] 
+	self.dOFx = [[],[],[]]
+	for x in [0,1,2]:
+	    self.dOFx[x] =  [[point[x] for point in trip] for trip in FormJ]
 	self.columns = []
 	self.headings=[]
 
