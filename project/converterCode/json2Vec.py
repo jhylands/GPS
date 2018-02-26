@@ -7,13 +7,18 @@ with open(name,'r') as f:
     data =json.loads(f.read())
 #Declare a set of features to be used.
 #for each trip create a velocity and time
-T = FeatureSet.getTime(data)
-dnx,n = FeatureSet.getdnx(data)
-fs = FeatureSet(dnx,n,T)
+fs = FeatureSet(data)
+#speed
 fs.mean(1)
-fs.mean(2)
 fs.median(1)
+fs.Qrange(1)
+fs.percentile(1)
+#acceloration
+fs.mean(2)
+fs.median(2)
+fs.min(2)
 fs.max(2)
+fs.percentile(2)
 
 fs.printHeadings()
 data = fs.getCSV()

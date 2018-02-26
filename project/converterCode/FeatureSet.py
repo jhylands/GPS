@@ -51,14 +51,14 @@ class FeatureSet():
 	self.headings.append('Standard deviation of ' + self.dxNames[d])
 	self.columns.append([np.std(trip) for trip in self.dOFx[d]])
 
-    def percentile(self,d,tiles):
+    def percentile(self,d,tiles=None):
 	#quatiles 1,10,25,75,90,99
 	tiles = tiles or [1,10,25,75,90,99] 
 	#CummulativeFrequenceySpeed
 	CFS = []
 	for tile in tiles:
 		self.columns.append( [np.percentile(trip,tile) for trip in self.dOFx[d]])
-		self.headers.append( str(tile) + ordinal(tile) + ' Percentile of ' + self.dxNames[d])
+		self.headings.append(ordinal(tile) + ' Percentile of ' + self.dxNames[d])
 
     def Qrange(self,d):
 	self.headings.append('Interquatile range of the ' + self.dxNames[d] + 's')
