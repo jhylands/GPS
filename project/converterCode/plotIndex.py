@@ -4,6 +4,7 @@ import sys,json
 from matplotlib import pyplot as plt
 
 def makeGraph(name,index):
+    i = index
     #check range
     #Rides
     if index<547:
@@ -37,16 +38,16 @@ def makeGraph(name,index):
 
     plt.plot([x[1] for x in trace])
     #name = sys.argv[2]
-    plt.savefig(name + str(index) + '.png')
+    plt.savefig(name + str(i) + '.png')
     plt.clf()
 
 #We want to take as argument and index
 #index file as input
 indexfile = sys.argv[1]
-indecies=[[] for i in range(1,64)]
+indecies=[[] for i in range(0,64)]
 with open(indexfile,'r') as f:
-    basename = '../images/boxs/box'
-    for i in range(0,63):
+    basename = '../images/boxes/box'
+    for i in range(0,64):
         print 'Status: ' + str(i)
         line = f.readline()[:-2]
         if line<>'':
