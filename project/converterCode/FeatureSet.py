@@ -1,5 +1,5 @@
 import numpy as np
-from datetime import datetime,timedelta
+# from datetime import datetime,timedelta
 
 #https://stackoverflow.com/questions/9647202/ordinal-numbers-replacement
 ordinal = lambda n: "%d%s" % (n,"tsnrhtdd"[(n/10%10!=1)*(n%10<4)*n%10::4])
@@ -55,7 +55,6 @@ class FeatureSet():
 	#quatiles 1,10,25,75,90,99
 	tiles = tiles or [1,10,25,75,90,99] 
 	#CummulativeFrequenceySpeed
-	CFS = []
 	for tile in tiles:
 		self.columns.append( [np.percentile(trip,tile) for trip in self.dOFx[d]])
 		self.headings.append(ordinal(tile) + ' Percentile of ' + self.dxNames[d])
