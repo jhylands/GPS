@@ -1,5 +1,34 @@
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src='js/mapHandle.js'></script>
+</head>
 <h1>SOM Map</h1>
-<img src="../images/allHits.png" alt="" usemap="#Map" />
+<div id='controls'>
+<table>
+<tr>
+<td>
+<ul>
+<li><a href='#last' onclick='changeTrace(-1)'>Last Trace</a></li>
+<li><a href='#next' onclick='changeTrace(1)'>Next Trace</a></li>
+<li><a href='#backToSom' onclick='back2Som()'>Back to SOM</a></li>
+</ul>
+</td>
+<td>
+<ul>
+<li><a href='#backToSom' onclick='som2("all")'>All hits</a></li>
+<li><a href='#car' onclick='som2("car")'>Car hits</a></li>
+<li><a href='#bus' onclick='som2("bus")'>Bus hits</a></li>
+<li><a href='#passenger' onclick='som2("passenger")'>Passenger hits</a></li>
+<li><a href='#walk' onclick='som2("walks")'>Walking hits</a></li>
+<li><a href='#ride' onclick='som2("rides")'>Cycling hits</a></li>
+<li><a href='#run' onclick='som2("runs")'>Running hits</a></li>
+</ul>
+</td>
+</tr>
+</table>
+</div>
+<img id='graph' src='' alt='' />
+<img id='mapImage' src="../images/allHits.png" alt="" usemap="#Map" />
 <map name="Map" id="Map"><area alt="0" title="" href="#0" onclick="showCell(0)" shape="poly" coords="309,848,250,882,250,951,309,984,369,951,369,882" />
 <area alt="1" title="" href="#1" onclick="showCell(1)" shape="poly" coords="428,848,369,882,369,951,428,984,488,951,488,882" />
 <area alt="2" title="" href="#2" onclick="showCell(2)" shape="poly" coords="547,848,488,882,488,951,547,984,607,951,607,882" />
