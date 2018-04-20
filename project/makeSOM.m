@@ -21,10 +21,14 @@ Motorised = [Car; Passenger; Bus];
  
 %setup training boxes
 training = ones(20,1071); %1071 from paper calulation 
-training(1,1:486) = 2;
-training(1,487:540) = 5;
-training(1,541:648) = 1;
-training(1,649:1071) = 3;
+RideIndx = 1:486;
+training(1,RideIndx) = 2;
+RunIndx = 487:540;
+training(1,RunIndx) = 5;
+WalkIndx = 541:648;
+training(1,WalkIndx) = 1;
+MotorIndx = 649:1071;
+training(1,MotorIndx) = 3;
 
 testing = ones(20,119);
 testing(1,1:54) = 2;
@@ -41,10 +45,10 @@ testing(1,73:119) = 3;
 %creating and training the network (10 cross validations)
 for i = 1:10
     
-    training(2:20,1:486) = I{i}; %486 items
-    training(2:20,487:540) = U{i}; %56 items
-    training(2:20,541:648)= W{i}; %108 items
-    training(2:20,649:1071) = M{i}; %423 items
+    training(2:20,RideIndx) = I{i}; %486 items
+    training(2:20,RunIndx) = U{i}; %56 items
+    training(2:20,WalkIndx)= W{i}; %108 items
+    training(2:20,MotorIndx) = M{i}; %423 items
 
     testing(2:20,1:54) = Iv{i};
     testing(2:20,55:60) = Uv{i};
@@ -60,6 +64,14 @@ for i = 1:10
     plotsomplanes(net{i});
     filename = strcat('plotsomplanes', num2str(i), '.png');
     saveas(f,filename);
+
+    %plotsomhits of network i
+    plotsomehits(net{i},training(2:20,:),'training',i);
+    plotsomehits(net{i},training(2:20,RideIndx),'Rides',i);
+    plotsomehits(net{i},training(2:20,RunIndx),'Runs',i);
+    plotsomehits(net{i},training(2:20,WalkIndx),'Walks',i);
+    plotsomehits(net{i},training(2:20,MotorIndx),'Motorised',i);
+
     %a results file to be worked with 
 end
 %copy of the networks saved
