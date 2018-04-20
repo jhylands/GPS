@@ -72,11 +72,16 @@ for i = 1:10
     plotsomehits(net{i},training(2:20,WalkIndx),'Walks',i);
     plotsomehits(net{i},training(2:20,MotorIndx),'Motorised',i);
 
+    plotsomehits(net{i},testing(2:20,:),'testing',i);
+    plotsomehits(net{i},testing(2:20,RideIndx),'Rides',i);
+    plotsomehits(net{i},testing(2:20,RunIndx),'Runs',i);
+    plotsomehits(net{i},testing(2:20,WalkIndx),'Walks',i);
+    plotsomehits(net{i},testing(2:20,MotorIndx),'Motorised',i);
     %a results file to be worked with 
 end
 %copy of the networks saved
 
-
+save('networks',net)
 
 %plot som hits for each group
 %plotsomhits
