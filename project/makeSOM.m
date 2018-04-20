@@ -57,8 +57,9 @@ for i = 1:10
     %images for each of the networks
     %outputting the planes
     f = figure;
-    plotsomplanes(net);
-    saveas(f,'img.png');
+    plotsomplanes(net{i});
+    filename = strcat('plotsomplanes', num2str(i), '.png');
+    saveas(f,filename);
     %a results file to be worked with 
 end
 %copy of the networks saved
