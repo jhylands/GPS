@@ -30,10 +30,8 @@ Pos = cell(1,10);
 tst = cell(1,10);
 a = cell(1,10);
 b = cell(1,10);
-targetsVector = cell(1:10);
-targetsVector1 = cell(1:10);
-outputsVector = cell(1:10);
-outputsVector1 = cell(1:10);
+trainingAccuracy = cell(1:10);
+testingAccuracy = cell(1:10);
 %creating and training the network (10 cross validations)
 parfor i = 1:10
     %setup training boxes
@@ -113,20 +111,20 @@ parfor i = 1:10
     %b{i} contains the classes of the SOM
     
     %test confusion
-    targetsVector{i}(1:54) = 1;
-    targetsVector{i}(55:60) = 2;
-    targetsVector{i}(61:72)=3;
-    targetsVector{i}(73:120)=4;
-    outputsVector{i} = [b{i}{tst{i}{1}} b{i}{tst{i}{2}} b{i}{tst{i}{3}} b{i}{tst{i}{4}}];
-    plotsomeconf(targetsVector{i},outputsVector{i},i,120)
+    targetsVector(1:54) = 1;
+    targetsVector(55:60) = 2;
+    targetsVector(61:72)=3;
+    targetsVector(73:120)=4;
+    outputsVector = [b{i}{tst{i}{1}} b{i}{tst{i}{2}} b{i}{tst{i}{3}} b{i}{tst{i}{4}}];
+    plotsomeconf(targetsVector,outputsVector,i,120)
     
     %train confusion
-    targetsVector1{i}(RideIndx) = 1;
-    targetsVector1{i}(RunIndx) = 2;
-    targetsVector1{i}(WalkIndx)=3;
-    targetsVector1{i}(MotorIndx)=4;
-    outputsVector1{i} = [b{i}{Pos{i}{1}} b{i}{Pos{i}{2}} b{i}{Pos{i}{3}} b{i}{Pos{i}{4}}];
-    plotsomeconf(targetsVector1{i},outputsVector1{i},i,1080)
+    targetsVector1(RideIndx) = 1;
+    targetsVector1(RunIndx) = 2;
+    targetsVector1(WalkIndx)=3;
+    targetsVector1(MotorIndx)=4;
+    outputsVector1 = [b{i}{Pos{i}{1}} b{i}{Pos{i}{2}} b{i}{Pos{i}{3}} b{i}{Pos{i}{4}}];
+    plotsomeconf(targetsVector1,outputsVector1,i,1080)
     
 end
 %copy of the networks saved
@@ -135,6 +133,6 @@ save('networks','net')
 
 
 
-'fin'
+
 
 
