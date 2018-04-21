@@ -81,10 +81,9 @@ for i = 1:10
 end
 %copy of the networks saved
 
-save('networks',net)
+save('networks','net')
 
-%plot som hits for each group
-%plotsomhits
+
 
 %Finding out the index of a group
 %vec = vec2ind(net(training(2:20,732:1179)));
