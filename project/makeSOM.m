@@ -19,7 +19,8 @@ Passenger = Passenger(:,1:20);
 %bus is alread divisible by 10
 Motorised = [Car Passenger Bus];
  
-
+SOMD1=10;
+SOMD2=3;
 
 %get cross validation scripts (slow, could do with opermising)
 [I,Iv] = crossVal(Rides');
@@ -62,7 +63,7 @@ parfor i = 1:10
     testing(2:20,61:72) = Wv{i}';
     testing(2:20,73:120) = Mv{i}';
 
-    net{i} = selforgmap([8 8]);
+    net{i} = selforgmap([SOMD1 SOMD2]);
     net{i} = train(net{i},training(2:20,:));
     
     %images for each of the networks
@@ -102,11 +103,11 @@ parfor i = 1:10
     
     %we have a list of indecies
     for v = 1:4
-        for somclass=1:64
+        for somclass=1:SOMD1*SOMD2
             a{i}{somclass}(v) = sum(Pos{i}{v}==somclass);
         end
     end
-    for somclass =1:64
+    for somclass =1:SOMD1*SOMD2
         [MaxSOMCLASSTHING,maxIndex] = max(a{i}{somclass});
         b{i}{somclass} = maxIndex;
     end

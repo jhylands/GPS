@@ -5,6 +5,6 @@ for box = [1:30]
     routeIndecies = find(checkBox==theVectors);
     box
     length(routeIndecies)
-    allOneString = sprintf('%.0f,' , routeIndecies)
+    allOneString = sprintf('%.0f,' , routeIndecies);
     acc = strcat(acc ,"\n" ,allOneString(1:end-1));% strip final comma    
 end
